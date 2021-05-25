@@ -1,5 +1,4 @@
 import copy
-import os
 from collections import deque, namedtuple
 
 import gym
@@ -11,9 +10,7 @@ import pyvirtualdisplay
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from icecream import ic
 
-import wandb
 from model import Combiner_network, GVF_network, soft_update
 from utils import choose_action, concat_state_action, exp_sample, get_feature
 
@@ -161,11 +158,9 @@ def evaluation():
 
     avg_reward = total_reward / n_trial
     avg_GVF_loss = total_GVF_loss / n_trial
-    # wandb.log({"score": avg_reward, "GVF Loss": avg_GVF_loss})
 
 
 def main():
-    wandb.init(project="ESP", entity="nedoai")
     eps = eps_start
 
     for i_episode in range(1, n_episode + 1):
